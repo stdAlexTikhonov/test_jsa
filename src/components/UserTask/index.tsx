@@ -42,7 +42,7 @@ export const UserTask: React.FC<Props> = ({ id }) => {
           className={classes.text}
         />
       </Box>
-      {!task.closed && <Comments />}
+      {!task.closed && <Comments comments={task.comments} id={task.id} />}
     </ListItem>
   );
 };

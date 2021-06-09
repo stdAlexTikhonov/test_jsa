@@ -2,20 +2,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { Task } from "../Props";
 
-interface TasksState {
-  tasks: any;
-}
+type TasksState = {
+  tasks: {
+    [key: string]: Task;
+  };
+};
 
 // Define the initial state using that type
 const initialState: TasksState = {
   tasks: {
     "0": {
-      id: 0,
+      id: "0",
       task: "Read book",
       date: new Date().toLocaleDateString(),
       closed: false,
       priority: 1,
-      comment: "",
+      comments: ["Это тестовый комментарий"],
     },
   },
 };
@@ -26,10 +28,10 @@ export const tasksSlice = createSlice({
   reducers: {
     addTask: (state, action: PayloadAction<string>) => {
       state.tasks[Object.keys(state.tasks).length] = {
-        id: Object.keys(state.tasks).length,
+        id: Object.keys(state.tasks).length.toString(),
         task: action.payload,
         date: new Date().toLocaleDateString(),
-        comment: "",
+        comments: [],
         closed: false,
         priority: 1,
       };
@@ -42,11 +44,22 @@ export const tasksSlice = createSlice({
       const new_task = Object.assign({}, task, { closed: !task.closed });
       state.tasks[action.payload] = new_task;
     },
+    addComment: (
+      state,
+      action: PayloadAction<{ id: string; comment: string }>
+    ) => {
+      const task = state.tasks[action.payload.id];
+      const new_task = Object.assign({}, task, {
+        comments: task.comments.concat([action.payload.comment]),
+      });
+      state.tasks[action.payload.id] = new_task;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addTask, removeTask, toggleTask } = tasksSlice.actions;
+export const { addTask, removeTask, toggleTask, addComment } =
+  tasksSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getTasksIds = (state: RootState) =>

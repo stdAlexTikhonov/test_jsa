@@ -1,8 +1,8 @@
 export type Task = {
-  id: number;
+  id: string;
   task: string;
   date: string;
   closed: boolean;
   priority: number;
-  comment: string;
+  comments: string[];
 };
