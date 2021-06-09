@@ -59,7 +59,12 @@ export const Comments: React.FC<Props> = ({ comments, id }) => {
           </Button>
         </ListItem>
       ) : (
-        <Button variant="text" size="small" onClick={() => setShow(true)}>
+        <Button
+          variant="text"
+          size="small"
+          style={{ marginLeft: 55 }}
+          onClick={() => setShow(true)}
+        >
           Добавить комментарий
         </Button>
       )}
