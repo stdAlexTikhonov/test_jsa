@@ -4,6 +4,6 @@ export const useStyles = makeStyles({
   tasks: {
     marginTop: 100,
     overflow: "auto",
-    maxHeight: 500,
+    maxHeight: 550,
   },
 });

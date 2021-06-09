@@ -7,6 +7,8 @@ import { Task } from "../../Props";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import { Comments } from "../Comments";
+import Box from "@material-ui/core/Box";
 
 type Props = {
   id: string;
@@ -24,20 +26,23 @@ export const UserTask: React.FC<Props> = ({ id }) => {
   const handleClick = () => dispatch(toggleTask(id));
 
   return (
-    <ListItem onClick={handleClick} className={classes.task}>
-      <IconButton>
-        {task.closed ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
-      </IconButton>
-      <ListItemText primary={task.task} className={classes.text} />
-      <ListItemText primary={task.date} className={classes.text} />
-      <ListItemText
-        primary={priority[task.priority]}
-        className={classes.text}
-      />
-      <ListItemText
-        primary={task.closed ? "Закрыто" : "Открыто"}
-        className={classes.text}
-      />
+    <ListItem className={classes.task}>
+      <Box display="flex">
+        <IconButton onClick={handleClick}>
+          {task.closed ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
+        </IconButton>
+        <ListItemText primary={task.task} className={classes.text} />
+        <ListItemText primary={task.date} className={classes.text} />
+        <ListItemText
+          primary={priority[task.priority]}
+          className={classes.text}
+        />
+        <ListItemText
+          primary={task.closed ? "Закрыто" : "Открыто"}
+          className={classes.text}
+        />
+      </Box>
+      {!task.closed && <Comments />}
     </ListItem>
   );
 };

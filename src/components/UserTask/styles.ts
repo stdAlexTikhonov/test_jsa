@@ -5,6 +5,8 @@ export const useStyles = makeStyles({
   task: {
     minWidth: 400,
     display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   text: {
     minWidth: 156,
