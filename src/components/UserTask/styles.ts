@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { blue } from "@material-ui/core/colors";
+import { red } from "@material-ui/core/colors";
 
 export const useStyles = makeStyles({
   task: {
@@ -10,5 +10,11 @@ export const useStyles = makeStyles({
   },
   text: {
     minWidth: 156,
+  },
+  btn: {
+    marginRight: 10,
+  },
+  row: {
+    background: red[100],
   },
 });

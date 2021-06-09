@@ -5,4 +5,5 @@ export type Task = {
   closed: boolean;
   priority: number;
   comments: string[];
+  finished: boolean;
 };

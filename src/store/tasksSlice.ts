@@ -18,6 +18,7 @@ const initialState: TasksState = {
       closed: false,
       priority: 1,
       comments: ["Это тестовый комментарий"],
+      finished: false,
     },
   },
 };
@@ -34,6 +35,7 @@ export const tasksSlice = createSlice({
         comments: [],
         closed: false,
         priority: 1,
+        finished: false,
       };
     },
     removeTask: (state, action: PayloadAction<string>) => {
@@ -54,11 +56,16 @@ export const tasksSlice = createSlice({
       });
       state.tasks[action.payload.id] = new_task;
     },
+    setFinished: (state, action: PayloadAction<string>) => {
+      const task = state.tasks[action.payload];
+      const new_task = Object.assign({}, task, { finished: true });
+      state.tasks[action.payload] = new_task;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addTask, removeTask, toggleTask, addComment } =
+export const { addTask, removeTask, toggleTask, addComment, setFinished } =
   tasksSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
