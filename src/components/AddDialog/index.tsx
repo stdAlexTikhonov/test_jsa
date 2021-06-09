@@ -26,9 +26,14 @@ function SimpleDialog(props: SimpleDialogProps) {
     onClose();
   };
 
+  const handleCancel = () => {
+    setValue("");
+    onClose();
+  };
+
   return (
     <Dialog
-      onClose={handleClose}
+      onClose={handleCancel}
       aria-labelledby="simple-dialog-title"
       open={open}
     >
@@ -45,6 +50,7 @@ function SimpleDialog(props: SimpleDialogProps) {
         variant="outlined"
         className={classes.btn}
         onClick={handleClose}
+        disabled={value.length === 0}
       >
         Добавить задачу
       </Button>
