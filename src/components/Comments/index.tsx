@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useStyles } from "./styles";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch } from "../../hooks";
 import { addComment } from "../../store/tasksSlice";
 
 type Props = {
@@ -18,12 +18,14 @@ type Props = {
 
 export const Comments: React.FC<Props> = ({ comments, id }) => {
   const [value, setValue] = useState("");
+  const [show, setShow] = useState(false);
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(addComment({ id, comment: value }));
     setValue("");
+    setShow(false);
   };
   return (
     <List className={classes.list}>
@@ -37,24 +39,30 @@ export const Comments: React.FC<Props> = ({ comments, id }) => {
           <ListItemText secondary={comment} />
         </ListItem>
       ))}
-      <ListItem className={classes.leave_comment}>
-        <TextField
-          autoFocus
-          margin="dense"
-          label="Комментарий"
-          type="text"
-          className={classes.comment}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-        <Button
-          onClick={handleClick}
-          color="primary"
-          disabled={value.length === 0}
-        >
-          Отправить
+      {show ? (
+        <ListItem className={classes.leave_comment}>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Комментарий"
+            type="text"
+            className={classes.comment}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <Button
+            onClick={handleClick}
+            color="primary"
+            disabled={value.length === 0}
+          >
+            Отправить
+          </Button>
+        </ListItem>
+      ) : (
+        <Button variant="text" size="small" onClick={() => setShow(true)}>
+          Добавить комментарий
         </Button>
-      </ListItem>
+      )}
     </List>
   );
 };

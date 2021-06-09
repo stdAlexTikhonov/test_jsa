@@ -61,7 +61,10 @@ export const tasksSlice = createSlice({
     },
     setFinished: (state, action: PayloadAction<string>) => {
       const task = state.tasks[action.payload];
-      const new_task = Object.assign({}, task, { finished: true });
+      const new_task = Object.assign({}, task, {
+        finished: true,
+        closed: true,
+      });
       state.tasks[action.payload] = new_task;
     },
   },
