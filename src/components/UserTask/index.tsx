@@ -4,6 +4,9 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { removeTask, getTasks, toggleTask } from "../../store/tasksSlice";
 import { useStyles } from "./styles";
 import { Task } from "../../Props";
+import IconButton from "@material-ui/core/IconButton";
+import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 type Props = {
   id: string;
@@ -21,7 +24,10 @@ export const UserTask: React.FC<Props> = ({ id }) => {
   const handleClick = () => dispatch(toggleTask(id));
 
   return (
-    <ListItem onClick={handleClick} button className={classes.task}>
+    <ListItem onClick={handleClick} className={classes.task}>
+      <IconButton>
+        {task.closed ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
+      </IconButton>
       <ListItemText primary={task.task} className={classes.text} />
       <ListItemText primary={task.date} className={classes.text} />
       <ListItemText
