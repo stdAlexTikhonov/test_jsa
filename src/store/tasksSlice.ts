@@ -49,7 +49,10 @@ export const tasksSlice = createSlice({
 export const { addTask, removeTask, toggleTask } = tasksSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const getTasksIds = (state: RootState) => Object.keys(state.tasks.tasks);
+export const getTasksIds = (state: RootState) =>
+  Object.keys(state.tasks.tasks).sort(
+    (a, b) => state.tasks.tasks[a].priority - state.tasks.tasks[b].priority
+  );
 
 // Other code such as selectors can use the imported `RootState` type
 export const getTasks = (state: RootState) => state.tasks.tasks;
