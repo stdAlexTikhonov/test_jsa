@@ -27,14 +27,17 @@ export const tasksSlice = createSlice({
   name: "tasks_slice",
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<string>) => {
+    addTask: (
+      state,
+      action: PayloadAction<{ task: string; priority: number }>
+    ) => {
       state.tasks[Object.keys(state.tasks).length] = {
         id: Object.keys(state.tasks).length.toString(),
-        task: action.payload,
+        task: action.payload.task,
         date: new Date().toLocaleDateString(),
         comments: [],
         closed: false,
-        priority: 1,
+        priority: action.payload.priority,
         finished: false,
       };
     },

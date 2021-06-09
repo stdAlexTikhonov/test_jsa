@@ -27,8 +27,8 @@ export const Comments: React.FC<Props> = ({ comments, id }) => {
   };
   return (
     <List className={classes.list}>
-      {comments.map((comment) => (
-        <ListItem className={classes.item}>
+      {comments.map((comment, i) => (
+        <ListItem className={classes.item} key={i}>
           <ListItemAvatar>
             <Avatar className={classes.avatar}>
               <PersonIcon fontSize="small" />
