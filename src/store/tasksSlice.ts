@@ -1,13 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
+import { Task } from "../Props";
 
 interface TasksState {
-  tasks: string[];
+  tasks: Task[];
 }
 
 // Define the initial state using that type
 const initialState: TasksState = {
-  tasks: ["Task1", "Task2", "Task3", "Task4"],
+  tasks: [
+    {
+      id: 0,
+      task: "Read book",
+      date: new Date().toLocaleDateString(),
+      closed: false,
+      priority: 1,
+      comment: "",
+    },
+  ],
 };
 
 export const tasksSlice = createSlice({
@@ -15,10 +25,19 @@ export const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action: PayloadAction<string>) => {
-      state.tasks = state.tasks.concat([action.payload]);
+      state.tasks = state.tasks.concat([
+        {
+          id: state.tasks.length,
+          task: action.payload,
+          date: new Date().toLocaleDateString(),
+          comment: "",
+          closed: false,
+          priority: 1,
+        },
+      ]);
     },
     removeTask: (state, action: PayloadAction<string>) => {
-      state.tasks = state.tasks.filter((item) => item !== action.payload);
+      state.tasks = state.tasks.filter((item) => item.task !== action.payload);
     },
   },
 });
@@ -27,6 +46,7 @@ export const tasksSlice = createSlice({
 export const { addTask, removeTask } = tasksSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const getTasks = (state: RootState) => state.tasks.tasks;
+export const getTasks = (state: RootState) =>
+  state.tasks.tasks.map((item) => item.task);
 
 export default tasksSlice.reducer;

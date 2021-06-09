@@ -3,6 +3,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { useAppDispatch } from "../../hooks";
 import { removeTask } from "../../store/tasksSlice";
 import { useStyles } from "./styles";
+import { Task } from "../../Props";
 
 type Props = {
   task: string;
