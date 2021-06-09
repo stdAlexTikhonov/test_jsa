@@ -1,15 +1,16 @@
 import { UserTask } from "../UserTask";
 import { useAppSelector } from "../../hooks";
-import { getTasks } from "../../store/tasksSlice";
+import { getTasksIds } from "../../store/tasksSlice";
 import List from "@material-ui/core/List";
+import { Task } from "../../Props";
 
 export const Tasks = () => {
-  const tasks = useAppSelector(getTasks);
+  const tasks = useAppSelector(getTasksIds);
 
   return (
     <List>
-      {tasks.map((task) => (
-        <UserTask task={task} />
+      {tasks.map((id) => (
+        <UserTask id={id} key={id} />
       ))}
     </List>
   );
